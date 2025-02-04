@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/theme/app_theme.dart';
+import 'package:meal_app/screens/category_screen.dart';
 
 void main(List<String> args) {
   runApp(App());
@@ -12,7 +13,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: Text('material screen'),
+      home: CategoryScreen(),
     );
   }
 }
