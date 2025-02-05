@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
+  MainDrawer({
+    super.key, 
+    required this.setScreen
+    });
+
+  void Function(String identifier) setScreen;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -47,7 +54,9 @@ class MainDrawer extends StatelessWidget {
                   fontSize: 24,
                 ),
           ),
-          onTap: () {},
+          onTap: () {
+            setScreen('Meals');
+          },
         ),
         ListTile(
           leading: Icon(
@@ -62,7 +71,9 @@ class MainDrawer extends StatelessWidget {
                   fontSize: 24,
                 ),
           ),
-          onTap: () {},
+          onTap: () {
+            setScreen('filters');
+          },
         ),
       ]),
     );
