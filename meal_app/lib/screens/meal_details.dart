@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:meal_app/model/meal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_app/providers/favourite_provider.dart';
+import 'package:meal_app/providers/filter_provider.dart';
 
 class MealDetailsScreen extends ConsumerWidget {
-  const MealDetailsScreen({
-    super.key, 
-    required this.meal
-    });
+  const MealDetailsScreen({super.key, required this.meal});
 
   final Meal meal;
-
   void _showInfoMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -21,6 +18,9 @@ class MealDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favouriteMeals = ref.watch(favouriteMealProvider);
+    final isFavourite = favouriteMeals.contains(meal);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(meal.title),
@@ -32,14 +32,12 @@ class MealDetailsScreen extends ConsumerWidget {
                       .toggleMealFavoriteStatus(meal);
 
                   if (isMarkedFav) {
-                    _showInfoMessage(context,
-                     'Marked as a favorite!');
+                    _showInfoMessage(context, 'Marked as a favorite!');
                   } else {
-                    _showInfoMessage(context,
-                    'Meal is no longer a favorite.');
+                    _showInfoMessage(context, 'Meal is no longer a favorite.');
                   }
                 },
-                icon: Icon(Icons.star))
+                icon: Icon(isFavourite ? Icons.star : Icons.star_border))
           ],
         ),
         body: SingleChildScrollView(
